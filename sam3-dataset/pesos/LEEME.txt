@@ -1,0 +1,11 @@
+Pesos de SAM 3 (Meta / Meta Superintelligence Labs)
+
+Origen: https://huggingface.co/facebook/sam3
+Archivo: sam3.pt
+SHA-256: 9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e
+
+El uso de estos pesos está sujeto a la SAM License, incluida en el archivo
+LICENSE de esta misma carpeta. Al usarlos aceptas esos términos.
+
+Modelo: https://huggingface.co/facebook/sam3
+Código: https://github.com/facebookresearch/sam3

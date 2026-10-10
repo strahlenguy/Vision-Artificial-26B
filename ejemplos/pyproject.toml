@@ -1,0 +1,26 @@
+[project]
+name = "ejemplos"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Alberto León", email = "ce.alberto.leon@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "accelerate>=1.15.0",
+    "mediapipe<1",
+    "opencv-python>=5.0.0.93",
+    "torch>=2.14.1",
+    "torchvision>=0.29.1",
+    "transformers>=4.57",
+]
+
+[project.scripts]
+ejemplos = "ejemplos:main"
+sam3-webcam = "ejemplos.sam3_tiempo_real:main"
+mediapipe-webcam = "ejemplos.mediapipe_tiempo_real:main"
+
+[build-system]
+requires = ["uv_build>=0.12.12,<0.13.0"]
+build-backend = "uv_build"

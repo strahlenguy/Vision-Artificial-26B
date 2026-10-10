@@ -1,0 +1,11 @@
+# SAM 3 viene incluido en transformers (corre en CUDA, Apple Silicon o CPU)
+torch
+torchvision            # también lo usa el filtro opcional por referencias (--referencias)
+transformers>=5
+
+# Dependencias de los scripts de este repo
+numpy
+pillow
+opencv-python          # solo si usas --exportar-yolo
+tqdm                   # barra de progreso (opcional)
+huggingface_hub        # descarga de los pesos desde HF

@@ -1,0 +1,35 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+build/
+dist/
+wheels/
+.ipynb_checkpoints/
+
+# --- Modelos y pesos (pesan mucho y tienen licencia propia) ---
+*.pt
+*.pth
+*.safetensors
+*.task
+*.onnx
+
+# --- sam3-dataset: pesos y datos no se versionan (cada quien trae los suyos) ---
+sam3-dataset/pesos/*
+!sam3-dataset/pesos/.gitkeep
+!sam3-dataset/pesos/LEEME.txt
+sam3-dataset/datos/raw/*
+!sam3-dataset/datos/raw/.gitkeep
+sam3-dataset/datos/referencias/*
+!sam3-dataset/datos/referencias/.gitkeep
+sam3-dataset/datos/salida/*
+!sam3-dataset/datos/salida/.gitkeep
+
+# --- Sistema y editores ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
