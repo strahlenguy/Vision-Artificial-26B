@@ -28,6 +28,13 @@ sam3-dataset/datos/referencias/*
 sam3-dataset/datos/salida/*
 !sam3-dataset/datos/salida/.gitkeep
 
+# --- entrenar_yolo: datasets, corridas y pesos no se versionan ---
+entrenar_yolo/datos/
+entrenar_yolo/runs/
+entrenar_yolo/pesos/
+entrenar_yolo/alumnos/
+entrenar_yolo/.turno_gpu.lock
+
 # --- Sistema y editores ---
 .DS_Store
 Thumbs.db
