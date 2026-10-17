@@ -4,9 +4,8 @@
 (*landmarks*) del cuerpo en tiempo real y en CPU. Con esos puntos se pueden
 medir ángulos, contar repeticiones, reconocer gestos, etc.
 
-Esta carpeta usa la **API clásica** (`mp.solutions`), por eso está fija en
-`mediapipe==0.10.21`. La versión con la API nueva (Tasks) está en
-[`../ejemplos/`](../ejemplos/).
+Esta carpeta usa la **API clásica** (`mp.solutions`), por eso el repo está
+fijo en `mediapipe==0.10.21` (y por lo mismo en Python 3.12).
 
 ## Archivos
 
@@ -16,6 +15,8 @@ Esta carpeta usa la **API clásica** (`mp.solutions`), por eso está fija en
 | `run2.py` | Detector configurable con **Holistic** (pose + manos + cara en un solo modelo). Trae la referencia de índices de cada punto |
 
 ## Uso
+
+Con el entorno de la raíz ya instalado (`uv sync`):
 
 ```bash
 cd media_pipe

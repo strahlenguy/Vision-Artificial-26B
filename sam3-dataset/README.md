@@ -21,7 +21,7 @@ sam3-dataset/
 │   ├── raw/                                   # imágenes de entrada (ignorado)
 │   ├── referencias/                           # fotos del objeto buscado (ignorado, opcional)
 │   └── salida/                                # el dataset generado (ignorado)
-├── requirements.txt
+├── requirements.txt                           # para pip/Colab (con uv: uv sync --group sam3)
 └── README.md
 ```
 
@@ -46,17 +46,26 @@ corre en Mac. Si no sabes cuál usar, usa el de `transformers`.
 
 ## Instalación
 
+**Con uv (recomendado en tu compu).** Usa el entorno compartido de la raíz del
+repo, agregando el grupo `sam3` (torch, transformers y compañía):
+
 ```bash
 git clone https://github.com/strahlenguy/Vision-Artificial-26B.git
-cd Vision-Artificial-26B/sam3-dataset
-
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+cd Vision-Artificial-26B
+uv sync --group sam3
+cd sam3-dataset
 ```
 
-**Versión transformers:**
+Con eso ya puedes correr la versión transformers cambiando `python` por
+`uv run` en los comandos de abajo (por ejemplo,
+`uv run scripts/sam3_recortar_dataset_transformers.py --help`).
+
+**Con pip** (Colab o si no usas uv). `requirements.txt` tiene lo mismo que el
+grupo `sam3`:
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 

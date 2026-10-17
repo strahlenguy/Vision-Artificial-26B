@@ -1,0 +1,69 @@
+[project]
+name = "vision-artificial-26b"
+version = "0.1.0"
+description = "Código del curso de Visión Artificial 2026B (CUTLAJO)"
+readme = "README.md"
+# MediaPipe 0.10.21 (API clásica) solo tiene wheels hasta Python 3.12
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    # Básicos: imágenes, arreglos y gráficas
+    "numpy>=1.26",
+    "opencv-python>=4.11.0.86",
+    "matplotlib>=3.9",
+    "pandas>=2.2",
+    # Morfología, regionprops y machine learning clásico
+    "scikit-image>=0.24",
+    "scikit-learn>=1.5",
+    # Landmarks de cuerpo, manos y cara (API clásica mp.solutions)
+    "mediapipe==0.10.21",
+    # Notebooks
+    "ipykernel>=6.29",
+    "jupyterlab>=4.2",
+]
+
+[dependency-groups]
+# SAM 3 (torch + transformers, varios GB). Solo si vas a usar sam3-dataset/:
+#   uv sync --group sam3
+sam3 = [
+    "torch",
+    "torchvision",
+    "transformers>=5",
+    "pillow",
+    "tqdm",
+    "huggingface_hub",
+]
+# Entrenar YOLO (Ultralytics + PyTorch, varios GB). Solo si vas a usar entrenar_yolo/:
+#   uv sync --group yolo
+yolo = [
+    "ultralytics>=8.4",
+    "torch",
+    "torchvision",
+]
+
+[tool.uv]
+# No es un paquete instalable: solo un entorno compartido por todas las carpetas
+package = false
+
+# PyTorch con GPU según el equipo (lo usan los grupos sam3 y yolo):
+#   - Windows y Linux x86 -> CUDA 12.8 (de la RTX 20 a la RTX 50)
+#   - Linux ARM64 (DGX Spark) -> CUDA 13
+#   - Mac -> el de PyPI, que ya trae MPS
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'win32' or (sys_platform == 'linux' and platform_machine == 'x86_64')" },
+    { index = "pytorch-cu130", marker = "sys_platform == 'linux' and platform_machine == 'aarch64'" },
+]
+torchvision = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'win32' or (sys_platform == 'linux' and platform_machine == 'x86_64')" },
+    { index = "pytorch-cu130", marker = "sys_platform == 'linux' and platform_machine == 'aarch64'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true

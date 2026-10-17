@@ -11,6 +11,7 @@ Teclas:
     m       mostrar/ocultar la malla completa de MediaPipe
     q       salir
 """
+
 import math
 
 import cv2
