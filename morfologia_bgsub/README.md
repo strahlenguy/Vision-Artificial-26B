@@ -1,37 +1,46 @@
 # Morfología, descriptores de forma y background subtraction
 
-Dos temas que van juntos: primero aprendemos a **describir formas con
-números** (área, circularidad, solidez…) y después a **separar lo que se
-mueve del fondo** en video. En los dos, la morfología (apertura y cierre) es
-la que limpia la máscara binaria.
+Temas que van juntos: primero aprendemos a **describir formas con números**
+(área, circularidad, solidez…), luego a **clasificarlas** con reglas y con
+machine learning clásico, y después a **separar lo que se mueve del fondo**
+en video. En todos, la morfología (apertura y cierre) es la que limpia la
+máscara binaria.
 
 ## Archivos
 
 | Archivo | Qué hace |
 |---|---|
-| `formas_paso_a_paso.ipynb` | Recorrido completo con OpenCV y scikit-image: gris → binaria → morfología → etiquetas → `regionprops` → descriptores → clasificación |
-| `formas_paso_a_paso_colab.ipynb` | El mismo notebook, listo para Colab (te pide subir la imagen o genera una) |
-| `formas_paso_a_paso_numpy.ipynb` | El mismo recorrido **sin OpenCV ni scikit-image**: cada operación escrita a mano con NumPy |
+| `formas_paso_a_paso.ipynb` | **Parte 1.** Recorrido completo con OpenCV y scikit-image: gris → binaria → morfología → etiquetas → `regionprops` → descriptores → clasificación |
+| `formas_ml.ipynb` | **Parte 2.** Tabla de características de muchas figuras, reglas a mano y machine learning: árbol de decisión, k-NN y Random Forest |
 | `formas_regionprops.py` | Versión en script del pipeline de descriptores, con ventanas paso a paso |
+| `generar_formas.py` | Dibuja imágenes sintéticas de figuras (una clase por columna) para hacer datasets |
 | `bgsub_webcam.py` | Background subtraction mínimo con MOG2 (~30 líneas) |
 | `bgsub_webcam_full.py` | Compara 4 métodos (diferencia de cuadros, promedio móvil, MOG2, KNN) con morfología y sliders |
-| `formas.jpg` | Imagen de prueba |
-| `formas_anotada.jpg` | Resultado esperado del clasificador |
+| `imagenes/formas.jpg` | Imagen de la parte 1 |
+| `imagenes/formas_anotada.jpg` | Resultado esperado del clasificador de la parte 1 |
+| `imagenes/formas_dataset.png` | 3 figuras de cada clase (entrenamiento de la parte 2) |
+| `imagenes/formas_prueba.png` | 2 figuras nuevas de cada clase (prueba de la parte 2) |
 
-Orden sugerido: `formas_paso_a_paso.ipynb` → `formas_paso_a_paso_numpy.ipynb`
-→ `bgsub_webcam.py` → `bgsub_webcam_full.py`.
+Orden sugerido: `formas_paso_a_paso.ipynb` → `formas_ml.ipynb` → `bgsub_webcam.py` → `bgsub_webcam_full.py`.
 
 ## Uso
+
+Primero instala el entorno una vez desde la raíz del repo (`uv sync`, ver el
+README principal). Luego:
 
 ```bash
 cd morfologia_bgsub
 
-# Notebooks
-uv run --with jupyter jupyter lab
+# Notebooks (o ábrelos en VS Code con el kernel .venv de la raíz)
+uv run jupyter lab
 
 # Descriptores de forma
-uv run formas_regionprops.py                 # usa formas.jpg
+uv run formas_regionprops.py                 # usa imagenes/formas.jpg
 uv run formas_regionprops.py mi_imagen.png
+
+# Más figuras para el dataset
+uv run generar_formas.py                     # regenera las dos imágenes de la parte 2
+uv run generar_formas.py mas_formas.png 10 5 # 10 por clase, semilla 5
 
 # Background subtraction
 uv run bgsub_webcam.py
@@ -66,7 +75,9 @@ Tip: apunta a una pared, presiona `r`, y luego entra al cuadro.
 
 - Toma una foto de objetos sobre una hoja blanca y corre `formas_regionprops.py`
   con ella. ¿Qué descriptores separan mejor tus clases?
-- En el notebook de NumPy, cambia el elemento estructurante (cruz vs. cuadrado)
-  y compara el resultado de la apertura.
+- En `formas_paso_a_paso.ipynb`, cambia el elemento estructurante (cruz vs.
+  cuadrado) y compara el resultado de la apertura.
+- En `formas_ml.ipynb`, genera 10 figuras por clase y vuelve a probar k-NN con
+  distintos valores de k.
 - En `bgsub_webcam_full.py`, ¿qué método aguanta mejor un cambio de luz? ¿Y una
   persona que se queda quieta?

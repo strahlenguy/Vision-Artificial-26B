@@ -18,7 +18,7 @@ Descriptores que calculamos para cada figura:
     relación de aspecto   ancho / alto de la caja
 
 Uso:
-    uv run formas_regionprops.py                 # usa formas.jpg
+    uv run formas_regionprops.py                 # usa imagenes/formas.jpg
     uv run formas_regionprops.py otra_imagen.png
 
 Teclas: cualquier tecla para pasar a la siguiente ventana, q para salir.
@@ -30,7 +30,7 @@ import cv2
 import numpy as np
 from skimage import measure
 
-RUTA = sys.argv[1] if len(sys.argv) > 1 else "formas.jpg"
+RUTA = sys.argv[1] if len(sys.argv) > 1 else "imagenes/formas.jpg"
 AREA_MIN = 100  # px; regiones más chicas se consideran ruido
 
 
@@ -145,8 +145,8 @@ rng = np.random.default_rng(1)
 for d in descriptores:
     color_falso[etiquetas == d["id"]] = rng.integers(60, 255, 3)
 
-cv2.imwrite("formas_anotada.jpg", anotada)
-print("\nGuardé formas_anotada.jpg")
+cv2.imwrite("imagenes/formas_anotada.jpg", anotada)
+print("\nGuardé imagenes/formas_anotada.jpg")
 
 ventanas = [
     ("1. Original", imagen),
